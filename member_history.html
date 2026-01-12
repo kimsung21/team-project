@@ -1,0 +1,602 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <link rel="stylesheet" href="styles/theme-colors.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TaxSonic | 기록 열람</title>
+  <style>
+html { overflow-y: scroll; scrollbar-gutter: stable; }
+
+  
+:root {
+  --bg-main: var(--ts-color-07);
+  --bg-surface: var(--ts-color-03);
+  --primary: var(--ts-color-16);
+  --primary-hover: var(--ts-color-17);
+
+  --text-main: var(--ts-color-08);
+  --text-sub: var(--ts-color-04);
+  --text-muted: var(--ts-color-09);
+
+  --border-soft: var(--ts-color-02);
+  --radius-lg: 16px;
+  --radius-md: 12px;
+}
+
+* { box-sizing: border-box; font-family: "Pretendard","Noto Sans KR",system-ui,sans-serif; }
+body { margin:0; background:var(--bg-main); color:var(--text-main); line-height:1.6; }
+a { color: inherit; text-decoration:none; }
+.container { max-width: 960px; margin: 0 auto; padding: 0 20px; }
+header { border-bottom: 1px solid var(--border-soft); background: var(--bg-main); position: sticky; top:0; z-index: 10; }
+.header-inner { height: 72px; display:flex; justify-content:space-between; align-items:center; }
+.logo { font-size: 22px; font-weight: 700; letter-spacing: 0.2px; }
+nav a { margin-left: 18px; font-size: 14px; color: var(--text-sub); }
+nav a.active { color: var(--text-main); font-weight: 600; }
+main { padding: 56px 0 96px; }
+.surface { background: var(--bg-surface); border: 1px solid var(--border-soft); border-radius: var(--radius-lg); padding: 28px; }
+.grid { display:grid; gap: 20px; }
+.grid-2 { grid-template-columns: 1fr; }
+@media (min-width: 860px){ .grid-2{ grid-template-columns: 1fr 1fr; } }
+.h1 { font-size: 34px; margin: 0 0 12px; }
+.h2 { font-size: 26px; margin: 0 0 10px; }
+.h3 { font-size: 18px; margin: 0 0 8px; }
+.p { color: var(--text-sub); margin: 0 0 18px; font-size: 15px; }
+.muted { color: var(--text-muted); font-size: 13px; }
+.hr { height:1px; background: var(--border-soft); margin: 18px 0; }
+.btn-primary { background: var(--primary); color:var(--ts-color-01); border:none; padding: 12px 16px; border-radius: 12px; cursor:pointer; font-size: 15px; }
+.btn-primary:hover { background: var(--primary-hover); }
+.btn-ghost { background: transparent; border: 1px solid var(--border-soft); padding: 12px 16px; border-radius: 12px; cursor:pointer; color: var(--text-sub); font-size: 15px; }
+.btn-danger { background:var(--ts-color-10); color:var(--ts-color-01); border:none; padding: 10px 14px; border-radius: 12px; cursor:pointer; font-size: 14px; }
+.btn-danger:hover { filter: brightness(0.95); }
+.btn-small { padding: 8px 10px; border-radius: 10px; font-size: 13px; }
+.field { margin-bottom: 14px; }
+label { display:block; font-size: 13px; color: var(--text-sub); margin-bottom: 6px; }
+input, select, textarea { width: 100%; padding: 12px; border-radius: 12px; border: 1px solid var(--border-soft); font-size: 14px; background: var(--ts-color-01); }
+textarea { min-height: 120px; resize: vertical; }
+.badge { display:inline-block; font-size: 12px; padding: 4px 8px; border-radius: 999px; border: 1px solid var(--border-soft); color: var(--text-sub); background: var(--ts-color-01); }
+.badge.green { border-color: rgba(127,159,133,0.35); color: var(--ts-color-11); }
+.badge.red { border-color: rgba(212,106,106,0.35); color: var(--ts-color-06); }
+.table { width: 100%; border-collapse: collapse; overflow: hidden; border-radius: 14px; }
+.table th, .table td { border-bottom: 1px solid var(--border-soft); padding: 12px 10px; text-align: left; font-size: 14px; }
+.table th { color: var(--text-sub); font-weight: 600; background: rgba(250,247,242,0.6); }
+.table tr:last-child td { border-bottom: none; }
+.kpi { display:flex; justify-content:space-between; align-items:flex-start; gap: 12px; padding: 18px; border: 1px solid var(--border-soft); border-radius: 16px; background: var(--bg-surface); }
+.kpi .num { font-size: 26px; font-weight: 800; }
+.kpi .label { color: var(--text-sub); font-size: 13px; }
+.card { background: var(--bg-surface); border: 1px solid var(--border-soft); border-radius: var(--radius-lg); padding: 22px; }
+.list { display:flex; flex-direction:column; gap: 12px; }
+.list-item { background: var(--bg-surface); border: 1px solid var(--border-soft); border-radius: 14px; padding: 16px; display:flex; justify-content:space-between; gap: 12px; }
+.list-item .meta { color: var(--text-muted); font-size: 12px; }
+.tabs { display:flex; gap: 8px; flex-wrap:wrap; }
+.tab { padding: 10px 12px; border-radius: 12px; border: 1px solid var(--border-soft); background: var(--ts-color-01); color: var(--text-sub); font-size: 14px; cursor:pointer; }
+.tab.active { background: var(--bg-surface); color: var(--text-main); font-weight: 600; }
+.notice { border: 1px dashed var(--border-soft); border-radius: 14px; padding: 14px; color: var(--text-sub); background: rgba(250,247,242,0.6); }
+.footer { border-top: 1px solid var(--border-soft); text-align:center; padding: 26px 0; font-size: 13px; color: var(--text-muted); }
+
+  
+  /* ===== Slide Drawer ===== */
+#hamburgerBtn{
+  position:fixed; left:8px; top:8px; z-index:10050;
+  width:46px; height:46px;
+  border-radius:14px;
+  border:1px solid var(--border-soft, var(--ts-color-02));
+  background:var(--ts-color-01);
+  cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  font-size:18px; line-height:1;
+  box-shadow:0 8px 22px rgba(0,0,0,.08);
+}
+#drawerBackdrop{
+  position:fixed; inset:0; z-index:10040;
+  background:rgba(0,0,0,.35);
+  opacity:0; pointer-events:none;
+  transition:opacity .18s ease;
+}
+#drawerBackdrop.open{ opacity:1; pointer-events:auto; }
+#drawer{
+  position:fixed; left:0; top:0; height:100%; width:320px; max-width:88vw;
+  z-index:10060;
+  background:var(--bg-surface, var(--ts-color-03));
+  border-right:1px solid var(--border-soft, var(--ts-color-02));
+  transform:translateX(-105%);
+  transition:transform .22s ease;
+  padding:18px;
+  box-shadow: 10px 0 28px rgba(0,0,0,.10);
+
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-bottom: 24px;
+}
+#drawer.open{ transform:translateX(0); }
+.drawerHead{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:12px; }
+.drawerTitle{ font-weight:800; }
+.drawerClose{
+  border:1px solid var(--border-soft, var(--ts-color-02)); background:var(--ts-color-01); border-radius:12px;
+  padding:8px 10px; cursor:pointer;
+}
+.drawerNav{ display:flex; flex-direction:column; gap:14px; margin-top:8px; }
+.drawerNav a{
+  padding:10px 12px; border-radius:12px;
+  border:1px solid var(--border-soft, var(--ts-color-02)); background:var(--ts-color-01);
+  color:var(--text-sub, var(--ts-color-04)); font-size:14px;
+  white-space:nowrap;
+}
+.drawerNav a:hover{ filter:brightness(.98); }
+/* header space for fixed hamburger */
+header .header-inner{ padding-left:64px; }
+
+
+/* === v2 fine-tune: button text alignment === */
+.btn-ghost, .btn-primary, .btn-outline, .btn, .drawerClose {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* drawer grouping */
+.drawerGroup{ padding: 8px 0; }
+.drawerGroup + .drawerGroup{ border-top: 1px solid rgba(255,255,255,0.14); }
+.drawerGroupTitle{
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 0.2px;
+  opacity: 0.85;
+  padding: 0 4px;
+  margin: 4px 0 8px;
+}
+.drawerNav a{ display:block; }
+
+
+/* ===== Drawer: active + accordion + admin ===== */
+#drawer .drawerNav a.active{ outline:0; border:1px solid rgba(255,255,255,0.42); background: rgba(255,255,255,0.18); }
+#drawer .drawerGroupTitle{ cursor:pointer; display:flex; align-items:center; justify-content:space-between; }
+#drawer .drawerGroupTitle::after{ content:'▾'; opacity:0.8; font-size:12px; transform: rotate(0deg); transition: transform .18s ease; }
+#drawer .drawerGroup.is-collapsed .drawerGroupTitle::after{ transform: rotate(-90deg); }
+#drawer .drawerGroup.is-collapsed a{ display:none; }
+#drawer .drawerAdminToggle{ display:flex; align-items:center; gap:8px; font-size:12px; opacity:.9; }
+#drawer .drawerAdminToggle input{ width:16px; height:16px; }
+
+
+/* v16 menu overrides */
+/* 메뉴 버튼 간격/테두리/선택표시(굵기) */
+#drawer .drawerNav a{ 
+  position: relative;
+  border: 1px solid var(--border-soft, var(--ts-color-02));
+  background: var(--ts-color-01);
+  outline: none !important;
+  box-shadow: none !important;
+  margin: 0;
+}
+#drawer .drawerNav a:hover{ filter: brightness(.98); }
+#drawer .drawerNav a:focus{ outline: none !important; }
+#drawer .drawerNav a.active{
+  font-weight: 800;
+  border: 1px solid var(--border-soft, var(--ts-color-02)) !important;
+  background: var(--ts-color-01) !important;
+  padding-left: 12px !important;
+  box-shadow: none !important;
+}
+/* 그룹 타이틀을 버튼처럼 (아코디언 클릭 영역 확대) */
+
+/* 펼친 그룹 내부 버튼 간격(요청 반영) */
+#drawer .drawerGroup:not(.is-collapsed) a + a{ margin-top:10px; }
+
+/* 그룹 타이틀(펼치기 전) 간격 원복 */
+#drawer .drawerGroupTitle{
+  cursor:pointer;
+  padding: 0 4px;
+  margin: 4px 0 8px;
+  border-radius: 0;
+  user-select: none;
+  background: transparent;
+}
+</style>
+
+
+<style id="taxsonic-theme">
+:root{
+  --ts-primary:var(--ts-color-05); /* Deep Blue */
+  --ts-accent:var(--ts-color-18);  /* Mint */
+  --ts-bg:var(--ts-color-12);
+  --ts-card:var(--ts-color-01);
+  --ts-border:var(--ts-color-13);
+  --ts-text:var(--ts-color-14);
+  --ts-text-sub:var(--ts-color-15);
+}
+
+/* Base */
+html,body{background:var(--ts-bg);}
+body{color:var(--ts-text);}
+
+/* Links */
+a{color:inherit;}
+a:hover{color:var(--ts-primary);}
+
+/* Primary CTA buttons (broad but safe) */
+.btn-primary,
+.button-primary,
+a.btn-primary,
+button.btn-primary,
+button.primary,
+a.primary,
+.primary-btn,
+.cta,
+.cta-btn{
+  background:var(--ts-primary) !important;
+  color:var(--ts-color-01) !important;
+  border:1px solid rgba(30,58,138,.25) !important;
+  font-weight:600 !important;
+}
+.btn-primary:hover,
+.button-primary:hover,
+a.btn-primary:hover,
+button.btn-primary:hover,
+button.primary:hover,
+a.primary:hover,
+.primary-btn:hover,
+.cta:hover,
+.cta-btn:hover{
+  filter:brightness(.95);
+}
+
+/* Secondary/accent highlights (badges, small emphasis) */
+.badge-accent,
+.tag-accent,
+.pill-accent{
+  background:rgba(45,212,191,.18) !important;
+  color:var(--ts-primary) !important;
+  border:1px solid rgba(45,212,191,.35) !important;
+}
+
+/* Active menu item: bold + deep blue (no dot) */
+a.active,
+nav a.active,
+.menu a.active,
+.drawer a.active,
+#drawer a.active{
+  color:var(--ts-primary) !important;
+  font-weight:700 !important;
+}
+
+/* Section title accent bar (if used) */
+.section-title::before,
+.sectionTitle::before,
+.title-bar::before{
+  background:var(--ts-primary) !important;
+}
+
+/* Key result amounts */
+.result-amount,
+.refund-amount,
+.total-amount,
+.amount-primary,
+.highlight-amount{
+  color:var(--ts-primary) !important;
+  font-weight:800 !important;
+}
+
+/* Chart bars / analysis visuals */
+.chart-bar.main,
+.chartBar.main,
+.graph-bar.main,
+.bar.main{
+  background:var(--ts-accent) !important;
+}
+.chart-bar,
+.chartBar,
+.graph-bar,
+.bar{
+  background:rgba(30,58,138,.18);
+}
+
+/* Focus ring accessibility without ugly outlines */
+:focus{outline:none;}
+:focus-visible{
+  outline:2px solid rgba(45,212,191,.55);
+  outline-offset:2px;
+  border-radius:10px;
+}
+
+/* TaxSonic analysis bars used in MyPage/Results */
+.barTrack{ background: rgba(30,58,138,.14) !important; }
+.barFill{ background: var(--ts-accent) !important; }
+.bottomBarInner{ background: var(--ts-accent) !important; }
+.miniBars .bottomBarInner{ background: rgba(45,212,191,.8) !important; }
+</style>
+
+
+<style>
+  body {
+    background-color: var(--ts-color-19) !important;
+  }
+</style>
+
+</head>
+<body>
+<!-- Slide Menu -->
+<button id="hamburgerBtn" type="button" aria-label="메뉴 열기">☰</button>
+<div id="drawerBackdrop" aria-hidden="true"></div>
+<aside id="drawer" aria-label="슬라이드 메뉴">
+  <div class="drawerHead">
+    <div class="drawerTitle">메뉴</div>
+    <button id="drawerClose" type="button" class="drawerClose">닫기</button>
+  </div>
+  <div class="drawerNav">
+    <div class="drawerGroup">
+      <div class="drawerGroupTitle">기본</div>
+      <a href="service_main.html">메인</a>
+      <a href="onboarding.html">이용 가이드</a>
+      <a href="login.html">로그인</a>
+    </div>
+
+    <div class="drawerGroup">
+      <div class="drawerGroupTitle">계산</div>
+      <a href="quick_calc.html">간편 계산</a>
+      <a href="detail_income.html">상세 계산</a>
+    </div>
+
+    <div class="drawerGroup">
+      <div class="drawerGroupTitle">고객센터</div>
+      <a href="board_qna.html">Q&A</a>
+      <a href="board_faq.html">FAQ</a>
+    </div>
+
+    <div class="drawerGroup" data-user-only="true">
+      <div class="drawerGroupTitle">내 정보</div>
+      <a href="mypage.html">마이페이지</a>
+      <a href="member_history.html">기록 열람</a>
+    </div>
+
+    <div class="drawerGroup" data-admin-only="true">
+      <div class="drawerGroupTitle">관리자</div>
+      <a href="admin_tax_rates.html">세율/정책</a>
+      <a href="admin_deduction_items.html">공제 항목</a>
+      <a href="admin_analytics.html">로그 분석</a>
+    </div>
+  </div>
+</aside>
+
+<header>
+  <div class="container header-inner">
+    <div class="logo"><a href="service_main.html">TaxSonic</a></div>
+    <nav>
+      <a class="" href="onboarding.html">이용 가이드</a>
+      <a class="" href="quick_calc.html">간편 계산</a>
+      <a class="active" href="detail_income.html">상세 계산</a>
+      <a class="" href="board_qna.html">Q&A</a>
+      <a class="" href="board_faq.html">FAQ</a>
+      <a class="" href="mypage.html">마이페이지</a>
+      <a href="login.html">로그아웃</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <div class="h1">기록 열람 (회원 전용)</div>
+  <p class="p">상세 계산까지 마친 내역을 확인하고, 분석 결과를 다시 내보낼 수 있습니다.</p>
+
+  <div class="surface">
+    <div class="tabs" style="margin-bottom: 12px;">
+      <button class="tab active" type="button">전체</button>
+      <button class="tab" type="button">최근 7일</button>
+      <button class="tab" type="button">저장형 리포트</button>
+    </div>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>생성일</th>
+          <th>총급여</th>
+          <th>결과</th>
+          <th>상태</th>
+          <th style="width: 220px;">작업</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>2026-01-05</td>
+          <td>44,000,000</td>
+          <td>+420,000</td>
+          <td><span class="badge green">저장</span></td>
+          <td>
+            <a class="btn-ghost btn-small" href="result_final.html">보기</a>
+            <button class="btn-primary btn-small" onclick="alert('PDF 다운로드(데모)')">PDF</button>
+            <button class="btn-ghost btn-small" onclick="alert('이메일 재전송(데모)')">이메일</button>
+          </td>
+        </tr>
+        <tr>
+          <td>2026-01-03</td>
+          <td>41,000,000</td>
+          <td>+180,000</td>
+          <td><span class="badge">임시</span></td>
+          <td>
+            <a class="btn-ghost btn-small" href="result_final.html">보기</a>
+            <button class="btn-ghost btn-small" onclick="alert('만료 예정(데모)')">만료</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="muted" style="margin-top: 12px;">
+      ※ 임시 리포트는 TTL 만료 후 자동 삭제될 수 있습니다.
+    </p>
+  </div>
+</main>
+
+<footer class="footer">© 2026 TaxSonic. All rights reserved.</footer>
+<script>
+(function(){
+  const btn = document.getElementById('hamburgerBtn');
+  const drawer = document.getElementById('drawer');
+  const backdrop = document.getElementById('drawerBackdrop');
+  const closeBtn = document.getElementById('drawerClose');
+
+  function open(){
+    drawer && drawer.classList.add('open');
+    backdrop && backdrop.classList.add('open');
+  }
+  function close(){
+    drawer && drawer.classList.remove('open');
+    backdrop && backdrop.classList.remove('open');
+  }
+  btn && btn.addEventListener('click', open);
+  closeBtn && closeBtn.addEventListener('click', close);
+  backdrop && backdrop.addEventListener('click', close);
+  // ===== Active highlight (drawer + header nav) =====
+  const current = (location.pathname.split('/').pop() || 'index.html').split('?')[0].split('#')[0];
+  const allLinks = document.querySelectorAll('#drawer .drawerNav a');
+  allLinks.forEach(a => {
+    const href = (a.getAttribute('href') || '').trim();
+    if(href && href === current){ a.classList.add('active'); }
+  });
+  const topNavLinks = document.querySelectorAll('header nav a');
+  topNavLinks.forEach(a => {
+    const href = (a.getAttribute('href') || '').trim();
+    if(href && href === current){ a.classList.add('active'); }
+  });
+
+    // ===== Admin visibility (role-based, no toggle) =====
+  function getUserRole(){
+    const role = localStorage.getItem('taxsonic_user_role')
+      || localStorage.getItem('taxsonic_role')
+      || localStorage.getItem('role')
+      || '';
+    return String(role).toLowerCase();
+  }
+  function isLoggedIn(){
+    const v = localStorage.getItem('taxsonic_is_logged_in')
+      || localStorage.getItem('taxsonic_logged_in')
+      || localStorage.getItem('is_logged_in')
+      || '';
+    const hasToken = !!(localStorage.getItem('taxsonic_token') || localStorage.getItem('auth_token') || localStorage.getItem('access_token'));
+    const hasUser = !!(localStorage.getItem('taxsonic_user_id') || localStorage.getItem('user_id') || localStorage.getItem('username'));
+    // If role is set, treat as logged-in for this static prototype.
+    const role = getUserRole();
+    return v === '1' || v === 'true' || hasToken || hasUser || role === 'admin' || role === 'user';
+  }
+  function getIsAdmin(){
+    const role = getUserRole();
+    const legacy = (localStorage.getItem('taxsonic_is_admin') === '1'); // backward compat for older builds
+    return role === 'admin' || legacy;
+  }
+  function applyAdminVisibility(){
+    const showAdmin = isLoggedIn() && getIsAdmin();
+    document.querySelectorAll('[data-admin-only="true"]').forEach(el => {
+      el.style.display = showAdmin ? '' : 'none';
+    });
+  }
+  applyAdminVisibility();
+
+
+
+// ===== User-only visibility (logged-in user only; admin 제외) =====
+function applyUserVisibility(){
+  const role = getUserRole();
+  const showUser = isLoggedIn() && role === 'user';
+  document.querySelectorAll('[data-user-only="true"]').forEach(el => {
+    el.style.display = showUser ? '' : 'none';
+  });
+}
+applyUserVisibility();// ===== Accordion groups =====
+  function setCollapsed(group, collapsed){
+    if(!group) return;
+    group.classList.toggle('is-collapsed', !!collapsed);
+    const title = group.querySelector('.drawerGroupTitle');
+    if(title){
+      title.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+    }
+  }
+
+  const groups = Array.from(document.querySelectorAll('#drawer .drawerGroup'));
+  groups.forEach(group => {
+    const title = group.querySelector('.drawerGroupTitle');
+    if(!title) return;
+
+    const name = title.textContent.trim();
+    const key = 'taxsonic_drawer_group_' + name;
+
+    // make title behave like a button
+    title.setAttribute('role','button');
+    title.setAttribute('tabindex','0');
+
+    const saved = localStorage.getItem(key);
+    if(saved === '1') setCollapsed(group, true);
+
+    const toggle = () => {
+      const collapsed = group.classList.contains('is-collapsed');
+      const next = !collapsed
+      setCollapsed(group, next);
+      localStorage.setItem(key, next ? '1' : '0');
+    };
+
+    title.addEventListener('click', toggle);
+    title.addEventListener('keydown', (e) => {
+      if(e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        toggle();
+      }
+    });
+  });
+
+  // Ensure active link's group is open
+  const active = document.querySelector('#drawer .drawerNav a.active');
+  if(active){
+    const group = active.closest('.drawerGroup');
+    if(group){
+      setCollapsed(group, false);
+      const title = group.querySelector('.drawerGroupTitle');
+      if(title){
+        const key = 'taxsonic_drawer_group_' + title.textContent.trim();
+        localStorage.setItem(key, '0');
+      }
+    }
+  }
+})();
+</script>
+
+<script>
+(function(){
+  function isLoggedIn(){
+    return (localStorage.getItem('taxsonic_is_logged_in') === '1');
+  }
+  function clearAuth(){
+    localStorage.removeItem('taxsonic_is_logged_in');
+    localStorage.removeItem('taxsonic_user_role');
+    localStorage.removeItem('taxsonic_role');
+    localStorage.removeItem('role');
+    localStorage.removeItem('taxsonic_is_admin'); // legacy
+  }
+
+  function enhanceLoginLogoutLinks(){
+    const links = Array.from(document.querySelectorAll('a[href="login.html"], a[href="./login.html"]'));
+    if(!links.length) return;
+
+    if(isLoggedIn()){
+      links.forEach(a=>{
+        a.setAttribute('href', '#logout');
+        a.textContent = '로그아웃';
+        a.classList.add('logoutLink');
+      });
+      document.addEventListener('click', function(e){
+        const a = e.target.closest('a[href="#logout"]');
+        if(!a) return;
+        e.preventDefault();
+        clearAuth();
+        window.location.href = 'index.html';
+      });
+    } else {
+      links.forEach(a=>{
+        a.textContent = '로그인';
+        // keep href as login.html
+      });
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', enhanceLoginLogoutLinks);
+})();
+</script>
+</body>
+</html>
