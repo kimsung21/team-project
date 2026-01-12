@@ -1,0 +1,43 @@
+/* TaxSonic - Unified Color Tokens */
+/* Edit values here to recolor the entire UI. */
+:root {
+  --ts-color-01: #FFFFFF; /* used 273x */
+  --ts-color-02: #D4DEE0; /* used 147x */
+  --ts-color-03: #F2F7F7; /* used 42x */
+  --ts-color-04: #4A5A63; /* used 42x */
+  --ts-color-05: #061E29; /* used 25x */
+  --ts-color-06: #B23B3B; /* used 23x */
+  --ts-color-07: #E8ECEC; /* used 21x */
+  --ts-color-08: #0B1520; /* used 21x */
+  --ts-color-09: #9AA7AD; /* used 21x */
+  --ts-color-10: #F0BABA; /* used 21x */
+  --ts-color-11: #2F6F4E; /* used 21x */
+  --ts-color-12: #F3F4F4; /* used 21x */
+  --ts-color-13: #D4DEE0; /* used 21x */
+  --ts-color-14: #0B1520; /* used 21x */
+  --ts-color-15: #4A5A63; /* used 21x */
+  --ts-color-16: #CFE6D9; /* used 19x */
+  --ts-color-17: #A8CDB9; /* used 19x */
+  --ts-color-18: #5F9598; /* used 19x */
+  --ts-color-19: #F3F4F4; /* used 19x */
+  --ts-color-20: #BFD7D8; /* used 2x */
+  --ts-color-21: #1D546D; /* used 2x */
+
+  /* Semantic aliases (optional; use if you want meaning-based control) */
+  --ts-bg-main: var(--ts-color-19);
+  --ts-surface: var(--ts-color-01);
+  --ts-paper: var(--ts-color-03);
+  --ts-header: var(--ts-color-01);
+  --ts-primary: var(--ts-color-05);
+  --ts-primary-hover: var(--ts-color-21);
+  --ts-text-main: var(--ts-color-14);
+  --ts-text-sub: var(--ts-color-15);
+  --ts-text-muted: var(--ts-color-04);
+  --ts-border: var(--ts-color-13);
+  --ts-border-strong: var(--ts-color-02);
+  --ts-danger: var(--ts-color-06);
+  --ts-danger-soft: var(--ts-color-10);
+  --ts-success: var(--ts-color-11);
+  --ts-success-soft: var(--ts-color-16);
+  --ts-accent: var(--ts-color-18);
+}
