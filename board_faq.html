@@ -136,7 +136,17 @@ header .header-inner{ padding-left:64px; }
   white-space: nowrap;
 }
 /* v4: FAQ 열기/닫기 배지 글씨 중앙 */
-.badge{display:inline-flex;align-items:center;justify-content:center;line-height:1;}
+.badge{display:inline-flex;align-items:center;justify-content:center;line-height:1; width:48px;}
+
+/* v6: FAQ 배지(열기/닫기) 크기 고정 + 늘어남 방지 */
+.list-item{ align-items:flex-start; }
+.list-item .badge{
+  width:48px;
+  min-width:48px;
+  flex:0 0 48px;      /* flex로 인해 내용 크기만큼 늘어나는 것 방지 */
+  align-self:flex-start; /* 답변 펼칠 때 세로로 늘어나는 것 방지 */
+}
+
 
 /* v4: button label center (no size change) */
 .drawerClose, .btn, .btn-outline, .btn-primary, .btn-ghost {display:inline-flex;align-items:center;justify-content:center;text-align:center;white-space:nowrap;}
