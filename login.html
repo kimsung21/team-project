@@ -336,7 +336,9 @@ nav a.active,
 /* 로그인 박스 크기 제한 */
 .login-box{
   width: min(800px, 100%);
-  margin: 0 auto;
+    height: 520px;
+  overflow: hidden;
+margin: 0 auto;
   display:flex;
   flex-direction: column;
   align-items: center;
@@ -345,6 +347,8 @@ nav a.active,
 .login-box form{
   width: 100%;
   max-width: 600px;   /* 폼은 적당히 중앙 */
+  flex: 1;
+  overflow: auto;
 }
 
 .login-box .h1,
