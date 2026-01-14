@@ -2,363 +2,52 @@
 
 <html lang="ko">
 <head>
-    <link rel="stylesheet" href="styles/theme-colors.css" />
-    <link rel="stylesheet" href="styles/layout.css" />
+<link href="styles/theme-colors.css" rel="stylesheet"/><link href="styles/layout.css" rel="stylesheet"/><link href="styles/admin_deduction_items.css" rel="stylesheet"/>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>TaxSonic | 관리자 - 공제 항목</title>
-<style>
-html { overflow-y: scroll; scrollbar-gutter: stable; }
-
-  
-:root {
-  --bg-main: var(--ts-color-07);
-  --bg-surface: var(--ts-color-03);
-  --primary: var(--ts-color-16);
-  --primary-hover: var(--ts-color-17);
-
-  --text-main: var(--ts-color-08);
-  --text-sub: var(--ts-color-04);
-  --text-muted: var(--ts-color-09);
-
-  --border-soft: var(--ts-color-02);
-  --radius-lg: 16px;
-  --radius-md: 12px;
-}
-
-* { box-sizing: border-box; font-family: "Pretendard","Noto Sans KR",system-ui,sans-serif; }
-body { margin:0; background:var(--bg-main); color:var(--text-main); line-height:1.6; }
-a { color: inherit; text-decoration:none; }
-.container { max-width: 960px; margin: 0 auto; padding: 0 20px; }
-header { border-bottom: 1px solid var(--border-soft); background: var(--bg-main); position: sticky; top:0; z-index: 10; }
-.header-inner { height: 72px; display:flex; justify-content:space-between; align-items:center; }
-.logo { font-size: 22px; font-weight: 700; letter-spacing: 0.2px; }
-nav a { margin-left: 18px; font-size: 14px; color: var(--text-sub); }
-nav a.active { color: var(--text-main); font-weight: 600; }
-main { padding: 56px 0 96px; }
-.surface { background: var(--bg-surface); border: 1px solid var(--border-soft); border-radius: var(--radius-lg); padding: 28px; }
-.grid { display:grid; gap: 20px; }
-.grid-2 { grid-template-columns: 1fr; }
-@media (min-width: 860px){ .grid-2{ grid-template-columns: 1fr 1fr; } }
-.h1 { font-size: 34px; margin: 0 0 12px; }
-.h2 { font-size: 26px; margin: 0 0 10px; }
-.h3 { font-size: 18px; margin: 0 0 8px; }
-.p { color: var(--text-sub); margin: 0 0 18px; font-size: 15px; }
-.muted { color: var(--text-muted); font-size: 13px; }
-.hr { height:1px; background: var(--border-soft); margin: 18px 0; }
-.btn-primary { background: var(--primary); color:var(--ts-color-01); border:none; padding: 12px 16px; border-radius: 12px; cursor:pointer; font-size: 15px; }
-.btn-primary:hover { background: var(--primary-hover); }
-.btn-ghost { background: transparent; border: 1px solid var(--border-soft); padding: 12px 16px; border-radius: 12px; cursor:pointer; color: var(--text-sub); font-size: 15px; }
-.btn-danger { background:var(--ts-color-10); color:var(--ts-color-01); border:none; padding: 10px 14px; border-radius: 12px; cursor:pointer; font-size: 14px; }
-.btn-danger:hover { filter: brightness(0.95); }
-.btn-small { padding: 8px 10px; border-radius: 10px; font-size: 13px; }
-.field { margin-bottom: 14px; }
-label { display:block; font-size: 13px; color: var(--text-sub); margin-bottom: 6px; }
-input, select, textarea { width: 100%; padding: 12px; border-radius: 12px; border: 1px solid var(--border-soft); font-size: 14px; background: var(--ts-color-01); }
-textarea { min-height: 120px; resize: vertical; }
-.badge { display:inline-block; font-size: 12px; padding: 4px 8px; border-radius: 999px; border: 1px solid var(--border-soft); color: var(--text-sub); background: var(--ts-color-01); }
-.badge.green { border-color: rgba(127,159,133,0.35); color: var(--ts-color-11); }
-.badge.red { border-color: rgba(212,106,106,0.35); color: var(--ts-color-06); }
-.table { width: 100%; border-collapse: collapse; overflow: hidden; border-radius: 14px; }
-.table th, .table td { border-bottom: 1px solid var(--border-soft); padding: 12px 10px; text-align: left; font-size: 14px; }
-.table th { color: var(--text-sub); font-weight: 600; background: rgba(250,247,242,0.6); }
-.table tr:last-child td { border-bottom: none; }
-.kpi { display:flex; justify-content:space-between; align-items:flex-start; gap: 12px; padding: 18px; border: 1px solid var(--border-soft); border-radius: 16px; background: var(--bg-surface); }
-.kpi .num { font-size: 26px; font-weight: 800; }
-.kpi .label { color: var(--text-sub); font-size: 13px; }
-.card { background: var(--bg-surface); border: 1px solid var(--border-soft); border-radius: var(--radius-lg); padding: 22px; }
-.list { display:flex; flex-direction:column; gap: 12px; }
-.list-item { background: var(--bg-surface); border: 1px solid var(--border-soft); border-radius: 14px; padding: 16px; display:flex; justify-content:space-between; gap: 12px; }
-.list-item .meta { color: var(--text-muted); font-size: 12px; }
-.tabs { display:flex; gap: 8px; flex-wrap:wrap; }
-.tab { padding: 10px 12px; border-radius: 12px; border: 1px solid var(--border-soft); background: var(--ts-color-01); color: var(--text-sub); font-size: 14px; cursor:pointer; }
-.tab.active { background: var(--bg-surface); color: var(--text-main); font-weight: 600; }
-.notice { border: 1px dashed var(--border-soft); border-radius: 14px; padding: 14px; color: var(--text-sub); background: rgba(250,247,242,0.6); }
-.footer { border-top: 1px solid var(--border-soft); text-align:center; padding: 26px 0; font-size: 13px; color: var(--text-muted); }
-
-  /* ===== Slide Drawer ===== */
-#hamburgerBtn{
-  position:fixed; left:8px; top:8px; z-index:10050;
-  width:46px; height:46px;
-  border-radius:14px;
-  border:1px solid var(--border-soft, var(--ts-color-02));
-  background:var(--ts-color-01);
-  cursor:pointer;
-  display:flex; align-items:center; justify-content:center;
-  font-size:18px; line-height:1;
-  box-shadow:0 8px 22px rgba(0,0,0,.08);
-}
-#drawerBackdrop{
-  position:fixed; inset:0; z-index:10040;
-  background:rgba(0,0,0,.35);
-  opacity:0; pointer-events:none;
-  transition:opacity .18s ease;
-}
-#drawerBackdrop.open{ opacity:1; pointer-events:auto; }
-#drawer{
-  position:fixed; left:0; top:0; height:100%; width:320px; max-width:88vw;
-  z-index:10060;
-  background:var(--bg-surface, var(--ts-color-03));
-  border-right:1px solid var(--border-soft, var(--ts-color-02));
-  transform:translateX(-105%);
-  transition:transform .22s ease;
-  padding:18px;
-  box-shadow: 10px 0 28px rgba(0,0,0,.10);
-
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  padding-bottom: 24px;
-}
-#drawer.open{ transform:translateX(0); }
-.drawerHead{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:12px; }
-.drawerTitle{ font-weight:800; }
-.drawerClose{
-  border:1px solid var(--border-soft, var(--ts-color-02)); background:var(--ts-color-01); border-radius:12px;
-  padding:8px 10px; cursor:pointer;
-}
-.drawerNav{ display:flex; flex-direction:column; gap:14px; margin-top:8px; }
-.drawerNav a{
-  padding:10px 12px; border-radius:12px;
-  border:1px solid var(--border-soft, var(--ts-color-02)); background:var(--ts-color-01);
-  color:var(--text-sub, var(--ts-color-04)); font-size:14px;
-  white-space:nowrap;
-}
-.drawerNav a:hover{ filter:brightness(.98); }
-/* header space for fixed hamburger */
-header .header-inner{ padding-left:64px; }
-  
-  
-/* v_admin_nav: admin top menu */
-nav a{ padding: 8px 10px; border-radius: 10px; margin-left: 10px; }
-nav a:hover{ background: rgba(255,255,255,.55); }
-nav a.active{ background: var(--bg-surface); border:1px solid var(--border-soft); }
-@media (max-width: 860px){
-  .header-inner{ flex-direction:column; align-items:flex-start; height:auto; gap:10px; padding:12px 0; }
-  nav{ display:flex; flex-wrap:wrap; gap:8px; }
-  nav a{ margin-left:0; }
-}
-
-/* drawer grouping */
-.drawerGroup{ padding: 8px 0; }
-.drawerGroup + .drawerGroup{ border-top: 1px solid rgba(255,255,255,0.14); }
-.drawerGroupTitle{
-  font-weight: 800;
-  font-size: 12px;
-  letter-spacing: 0.2px;
-  opacity: 0.85;
-  padding: 0 4px;
-  margin: 4px 0 8px;
-}
-.drawerNav a{ display:block; }
 
 
-/* ===== Drawer: active + accordion + admin ===== */
-#drawer .drawerNav a.active{ outline:0; border:1px solid rgba(255,255,255,0.42); background: rgba(255,255,255,0.18); }
-#drawer .drawerGroupTitle{ cursor:pointer; display:flex; align-items:center; justify-content:space-between; }
-#drawer .drawerGroupTitle::after{ content:'▾'; opacity:0.8; font-size:12px; transform: rotate(0deg); transition: transform .18s ease; }
-#drawer .drawerGroup.is-collapsed .drawerGroupTitle::after{ transform: rotate(-90deg); }
-#drawer .drawerGroup.is-collapsed a{ display:none; }
-#drawer .drawerAdminToggle{ display:flex; align-items:center; gap:8px; font-size:12px; opacity:.9; }
-#drawer .drawerAdminToggle input{ width:16px; height:16px; }
-
-
-/* v16 menu overrides */
-/* 메뉴 버튼 간격/테두리/선택표시(굵기) */
-#drawer .drawerNav a{ 
-  position: relative;
-  border: 1px solid var(--border-soft, var(--ts-color-02));
-  background: var(--ts-color-01);
-  outline: none !important;
-  box-shadow: none !important;
-  margin: 0;
-}
-#drawer .drawerNav a:hover{ filter: brightness(.98); }
-#drawer .drawerNav a:focus{ outline: none !important; }
-#drawer .drawerNav a.active{
-  font-weight: 800;
-  border: 1px solid var(--border-soft, var(--ts-color-02)) !important;
-  background: var(--ts-color-01) !important;
-  padding-left: 12px !important;
-  box-shadow: none !important;
-}
-/* 그룹 타이틀을 버튼처럼 (아코디언 클릭 영역 확대) */
-
-/* 펼친 그룹 내부 버튼 간격(요청 반영) */
-#drawer .drawerGroup:not(.is-collapsed) a + a{ margin-top:10px; }
-
-/* 그룹 타이틀(펼치기 전) 간격 원복 */
-#drawer .drawerGroupTitle{
-  cursor:pointer;
-  padding: 0 4px;
-  margin: 4px 0 8px;
-  border-radius: 0;
-  user-select: none;
-  background: transparent;
-}
-</style>
-
-
-<style id="taxsonic-theme">
-:root{
-  --ts-primary:var(--ts-color-05); /* Deep Blue */
-  --ts-accent:var(--ts-color-18);  /* Mint */
-  --ts-bg:var(--ts-color-12);
-  --ts-card:var(--ts-color-01);
-  --ts-border:var(--ts-color-13);
-  --ts-text:var(--ts-color-14);
-  --ts-text-sub:var(--ts-color-15);
-}
-
-/* Base */
-html,body{background:var(--ts-bg);}
-body{color:var(--ts-text);}
-
-/* Links */
-a{color:inherit;}
-a:hover{color:var(--ts-primary);}
-
-/* Primary CTA buttons (broad but safe) */
-.btn-primary,
-.button-primary,
-a.btn-primary,
-button.btn-primary,
-button.primary,
-a.primary,
-.primary-btn,
-.cta,
-.cta-btn{
-  background:var(--ts-primary) !important;
-  color:var(--ts-color-01) !important;
-  border:1px solid rgba(30,58,138,.25) !important;
-  font-weight:600 !important;
-}
-.btn-primary:hover,
-.button-primary:hover,
-a.btn-primary:hover,
-button.btn-primary:hover,
-button.primary:hover,
-a.primary:hover,
-.primary-btn:hover,
-.cta:hover,
-.cta-btn:hover{
-  filter:brightness(.95);
-}
-
-/* Secondary/accent highlights (badges, small emphasis) */
-.badge-accent,
-.tag-accent,
-.pill-accent{
-  background:rgba(45,212,191,.18) !important;
-  color:var(--ts-primary) !important;
-  border:1px solid rgba(45,212,191,.35) !important;
-}
-
-/* Active menu item: bold + deep blue (no dot) */
-a.active,
-nav a.active,
-.menu a.active,
-.drawer a.active,
-#drawer a.active{
-  color:var(--ts-primary) !important;
-  font-weight:700 !important;
-}
-
-/* Section title accent bar (if used) */
-.section-title::before,
-.sectionTitle::before,
-.title-bar::before{
-  background:var(--ts-primary) !important;
-}
-
-/* Key result amounts */
-.result-amount,
-.refund-amount,
-.total-amount,
-.amount-primary,
-.highlight-amount{
-  color:var(--ts-primary) !important;
-  font-weight:800 !important;
-}
-
-/* Chart bars / analysis visuals */
-.chart-bar.main,
-.chartBar.main,
-.graph-bar.main,
-.bar.main{
-  background:var(--ts-accent) !important;
-}
-.chart-bar,
-.chartBar,
-.graph-bar,
-.bar{
-  background:rgba(30,58,138,.18);
-}
-
-/* Focus ring accessibility without ugly outlines */
-:focus{outline:none;}
-:focus-visible{
-  outline:2px solid rgba(45,212,191,.55);
-  outline-offset:2px;
-  border-radius:10px;
-}
-
-/* TaxSonic analysis bars used in MyPage/Results */
-.barTrack{ background: rgba(30,58,138,.14) !important; }
-.barFill{ background: var(--ts-accent) !important; }
-.bottomBarInner{ background: var(--ts-accent) !important; }
-.miniBars .bottomBarInner{ background: rgba(45,212,191,.8) !important; }
-</style>
-
-
-<style>
-  body {
-    background-color: var(--ts-color-19) !important;
-  }
-</style>
 
 </head>
 <body>
-  <!-- Slide Menu -->
-<button id="hamburgerBtn" type="button" aria-label="메뉴 열기">☰</button>
-<div id="drawerBackdrop" aria-hidden="true"></div>
-<aside id="drawer" aria-label="슬라이드 메뉴">
-  <div class="drawerHead">
-    <div class="drawerTitle">메뉴</div>
-    <button id="drawerClose" type="button" class="drawerClose">닫기</button>
-  </div>
-  <div class="drawerNav">
-    <div class="drawerGroup">
-      <div class="drawerGroupTitle">기본</div>
-      <a href="service_main.html">메인</a>
-      <a href="onboarding.html">이용 가이드</a>
-      <a href="login.html">로그인</a>
-    </div>
-
-    <div class="drawerGroup">
-      <div class="drawerGroupTitle">계산</div>
-      <a href="quick_calc.html">간편 계산</a>
-      <a href="detail_income.html">상세 계산</a>
-    </div>
-
-    <div class="drawerGroup">
-      <div class="drawerGroupTitle">고객센터</div>
-      <a href="board_qna.html">Q&A</a>
-      <a href="board_faq.html">FAQ</a>
-    </div>
-
-    <div class="drawerGroup" data-user-only="true">
-      <div class="drawerGroupTitle">내 정보</div>
-      <a href="mypage.html">마이페이지</a>
-      <a href="member_history.html">기록 열람</a>
-    </div>
-
-    <div class="drawerGroup" data-admin-only="true">
-      <div class="drawerGroupTitle">관리자</div>
-      <a href="admin_tax_rates.html">세율/정책</a>
-      <a href="admin_deduction_items.html">공제 항목</a>
-      <a href="admin_analytics.html">로그 분석</a>
-    </div>
-  </div>
+<!-- Slide Menu -->
+<button aria-label="메뉴 열기" id="hamburgerBtn" type="button">☰</button>
+<div aria-hidden="true" id="drawerBackdrop"></div>
+<aside aria-label="슬라이드 메뉴" id="drawer">
+<div class="drawerHead">
+<div class="drawerTitle">메뉴</div>
+<button class="drawerClose" id="drawerClose" type="button">닫기</button>
+</div>
+<div class="drawerNav">
+<div class="drawerGroup">
+<div class="drawerGroupTitle">기본</div>
+<a href="service_main.html">메인</a>
+<a href="onboarding.html">이용 가이드</a>
+<a href="login.html">로그인</a>
+</div>
+<div class="drawerGroup">
+<div class="drawerGroupTitle">계산</div>
+<a href="quick_calc.html">간편 계산</a>
+<a href="detail_income.html">상세 계산</a>
+</div>
+<div class="drawerGroup">
+<div class="drawerGroupTitle">고객센터</div>
+<a href="board_qna.html">Q&amp;A</a>
+<a href="board_faq.html">FAQ</a>
+</div>
+<div class="drawerGroup" data-user-only="true">
+<div class="drawerGroupTitle">내 정보</div>
+<a href="mypage.html">마이페이지</a>
+<a href="member_history.html">기록 열람</a>
+</div>
+<div class="drawerGroup" data-admin-only="true">
+<div class="drawerGroupTitle">관리자</div>
+<a href="admin_tax_rates.html">세율/정책</a>
+<a href="admin_deduction_items.html">공제 항목</a>
+<a href="admin_analytics.html">로그 분석</a>
+</div>
+</div>
 </aside>
 <header>
 <div class="container header-inner">
@@ -592,7 +281,6 @@ applyUserVisibility();// ===== Accordion groups =====
   }
 })();
 </script>
-
 <script>
 (function(){
   function isLoggedIn(){
