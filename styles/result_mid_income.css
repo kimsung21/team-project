@@ -1,0 +1,128 @@
+/* Auto-generated page CSS extracted from inline <style> in result_mid_income.html */
+/* v5: mid buttons */
+.btn,
+.btnPrimary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* v9: mid step buttons look like real buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1px solid var(--border-soft);
+  background: var(--ts-color-01);
+  color: var(--text-main);
+  font-size: 15px;
+  cursor: pointer;
+}
+.btn:hover {
+  filter: brightness(0.98);
+}
+.btnPrimary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(30, 58, 138, 0.35);
+  background: var(--primary);
+  color: var(--ts-color-01);
+  font-size: 15px;
+  cursor: pointer;
+}
+.btnPrimary:hover {
+  background: var(--primary-hover);
+}
+
+/* v8-fixed: docs help modal (rent/donation) */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  white-space: nowrap;
+}
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  z-index: 60;
+}
+.modalOverlay.hidden {
+  display: none;
+}
+.modalCard {
+  width: min(520px, 100%);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-soft);
+  border-radius: 18px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+  padding: 14px;
+}
+.modalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.modalTitle {
+  font-weight: 900;
+}
+.modalBody {
+  color: var(--text-sub);
+  font-size: 14px;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+/* v13: spacing between AI comment and next step */
+.ai-next-spacer {
+  height: 24px;
+}
+.bottomMergedRow {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.bottomMergedGroup {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+.bottomMergedGroupRight {
+  max-width: 320px;
+}
+.bottomMergedDivider {
+  width: 1px;
+  align-self: stretch;
+  background: var(--border-soft);
+  border-radius: 1px;
+}
+.bottomTitleRight {
+  text-align: right;
+}
+.bottomBtnsRight {
+  justify-content: flex-end;
+}
+.bottomMergedRow {
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border-soft);
+}
+
+/* Patch: make bottomBarInner match page background (Option 2) */
+.bottomBarInner{ background: var(--ts-bg-main, var(--ts-color-19)) !important; }

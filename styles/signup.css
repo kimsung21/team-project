@@ -1,0 +1,32 @@
+/* Auth pages shared (login/signup)
+   Goal: same box width, same typography alignment, and consistent top position
+   between login and signup (avoids "center shift" caused by different form heights).
+*/
+.auth-center {
+  /* keep page roomy like login2 */
+  width: 100%;
+  padding: 56px 0 72px;
+  min-height: calc(96vh - 72px - 96px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth-box {
+  width: min(800px, 100%);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.auth-box form {
+  width: 100%;
+  max-width: 600px;
+}
+
+.auth-box .h1,
+.auth-box .p,
+.auth-box .muted {
+  text-align: center;
+}

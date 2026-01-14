@@ -1,0 +1,15 @@
+/* Auto-generated page CSS extracted from inline <style> in board_qna.html */
+
+/* (No unique inline styles; file exists for consistency.) */
+
+/* Q&A page header: keep title left and action button at top-right */
+.qna-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+
+/* Prevent the header row from becoming cramped on small screens */
+.qna-head .h3{ margin:0; }
+.qna-head a.btn-small{ flex:0 0 auto; }

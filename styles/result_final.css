@@ -1,0 +1,106 @@
+/* Auto-generated page CSS extracted from inline <style> in result_final.html */
+/* v5: button label center */
+.btn,
+.btnPrimary,
+.btn-outline,
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* v7: docs help modal */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  white-space: nowrap;
+}
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  z-index: 60;
+}
+.modalOverlay.hidden {
+  display: none;
+}
+.modalCard {
+  width: min(520px, 100%);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-soft);
+  border-radius: 18px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+  padding: 14px;
+}
+.modalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.modalTitle {
+  font-weight: 900;
+}
+.modalBody {
+  color: var(--sub);
+  font-size: 14px;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+@media (max-width: 860px) {
+  main {
+    padding-bottom: 240px;
+  }
+}
+/* v19: final page match mid layout */
+.card .surface {
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+.card .surface + .surface {
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border-soft);
+}
+
+/* v20: keep export box width same as mid by reserving right column */
+.bottomMergedRow {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.bottomMergedGroup {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+.bottomMergedGroupRight {
+  max-width: 320px;
+}
+.bottomMergedDivider {
+  width: 1px;
+  align-self: stretch;
+  background: var(--border-soft);
+  border-radius: 1px;
+}
+/* Export section becomes a normal flow section (not fixed) */
+.bottomMergedRow {
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border-soft);
+}
+
+/* Patch: make bottomBarInner match page background (Option 2) */
+.bottomBarInner{ background: var(--ts-bg-main, var(--ts-color-19)) !important; }

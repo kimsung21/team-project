@@ -1,0 +1,33 @@
+/* Shared visuals (amount highlights + chart bars + analysis bars)
+   Extracted from layout.css
+*/
+
+/* Key result amounts */
+.result-amount,
+.refund-amount,
+.total-amount,
+.amount-primary,
+.highlight-amount{
+  color:var(--ts-primary) !important;
+  font-weight:800 !important;
+}
+
+/* Chart bars / analysis visuals */
+.chart-bar.main,
+.chartBar.main,
+.graph-bar.main,
+.bar.main{
+  background:var(--ts-accent) !important;
+}
+.chart-bar,
+.chartBar,
+.graph-bar,
+.bar{
+  background:rgba(30,58,138,.18);
+}
+
+/* TaxSonic analysis bars used in MyPage/Results */
+.barTrack{ background: rgba(30,58,138,.14) !important; }
+.barFill{ background: var(--ts-accent) !important; }
+.bottomBarInner{ background: var(--ts-accent) !important; }
+.miniBars .bottomBarInner{ background: rgba(45,212,191,.8) !important; }
