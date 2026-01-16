@@ -97,7 +97,7 @@
                       data-gender="F"
                       type="button"
                     >
-                      여
+                      녀
                     </button>
                   </span>
                 </div>
@@ -117,17 +117,12 @@
                 >
                   <button
                     class="btn-outline btn-small"
-                    onclick="addMoney('money_', 100000)"
+                    onclick="resetMoney('money_')"
                     type="button"
                   >
-                    +10만</button
-                  ><button
-                    class="btn-outline btn-small"
-                    onclick="addMoney('money_', 1000000)"
-                    type="button"
-                  >
-                    +100만</button
-                  ><button
+                    초기화
+                  </button>
+                  <button
                     class="btn-outline btn-small"
                     onclick="addMoney('money_', 10000000)"
                     type="button"
@@ -135,10 +130,16 @@
                     +1000만</button
                   ><button
                     class="btn-outline btn-small"
-                    onclick="resetMoney('money_')"
+                    onclick="addMoney('money_', 5000000)"
                     type="button"
                   >
-                    리셋
+                    +500만</button
+                  ><button
+                    class="btn-outline btn-small"
+                    onclick="addMoney('money_', 1000000)"
+                    type="button"
+                  >
+                    +100만
                   </button>
                 </div>
               </div>
