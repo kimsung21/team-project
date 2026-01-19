@@ -115,32 +115,32 @@
                   data-money-controls="1"
                   style="margin-top: 8px"
                 >
-                  <button
-                    class="btn-outline btn-small"
-                    onclick="resetMoney('money_')"
-                    type="button"
-                  >
-                    초기화
-                  </button>
-                  <button
-                    class="btn-outline btn-small"
-                    onclick="addMoney('money_', 10000000)"
-                    type="button"
-                  >
-                    +1000만</button
-                  ><button
-                    class="btn-outline btn-small"
-                    onclick="addMoney('money_', 5000000)"
-                    type="button"
-                  >
-                    +500만</button
-                  ><button
-                    class="btn-outline btn-small"
-                    onclick="addMoney('money_', 1000000)"
-                    type="button"
-                  >
-                    +100만
-                  </button>
+                   <button
+                  class="btn-outline btn-small"
+                  onclick="addMoney(this, 10000000)"
+                  type="button"
+                >
+                  +1000만</button
+                ><button
+                  class="btn-outline btn-small"
+                  onclick="addMoney(this, 5000000)"
+                  type="button"
+                >
+                  +500만</button
+                ><button
+                  class="btn-outline btn-small"
+                  onclick="addMoney(this, 1000000)"
+                  type="button"
+                >
+                  +100만
+                </button>
+                <button
+                class="btn-outline btn-small"
+                onclick="resetMoney(this)"
+                type="button"
+              >
+                초기화
+              </button>
                 </div>
               </div>
             </div>
@@ -163,7 +163,7 @@
           </div>
           <div class="hr"></div>
           <div class="muted" style="margin-bottom: 10px">추천 다음 단계</div>
-          <div style="display: flex; gap: 10px; flex-wrap: wrap">
+          <div class="next-step">
             <a class="btn-ghost" href="detail_income.html"
               >상세 계산으로 이동</a
             >
@@ -327,22 +327,32 @@
       })();
     </script>
     <script>
-      function addMoney(inputId, amount) {
-        const el = document.getElementById(inputId);
+      function getFieldInput(btn) {
+        // 버튼이 들어있는 가장 가까운 field를 찾고, 그 안의 input을 찾음
+        const field = btn.closest(".field");
+        if (!field) return null;
+        return field.querySelector("input");
+      }
+
+      function addMoney(btn, amount) {
+        const el = getFieldInput(btn);
         if (!el) return;
+
         const cur =
           parseInt((el.value || "0").toString().replace(/[^0-9-]/g, ""), 10) ||
           0;
+
         el.value = cur + amount;
         el.dispatchEvent(new Event("input", { bubbles: true }));
       }
 
-      function resetMoney(id) {
-        const el = document.getElementById(id);
+      function resetMoney(btn) {
+        const el = getFieldInput(btn);
         if (!el) return;
+
         el.value = "";
         el.dispatchEvent(new Event("input", { bubbles: true }));
-      }
+      }      
 
       (function () {
         const hidden = document.getElementById("gender");
