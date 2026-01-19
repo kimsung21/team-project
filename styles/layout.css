@@ -168,6 +168,12 @@ nav a.active {
 main {
   padding: 56px 0 96px;
 }
+header {
+  margin-bottom: 32px; /* 전체 페이지 공통 간격 */
+}
+main.container {
+  padding-top: 0; /* 페이지별 중복 여백 방지 */
+}
 .surface {
   background: var(--bg-surface);
   border: 1px solid var(--border-soft);
