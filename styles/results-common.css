@@ -241,7 +241,7 @@ header .header-inner{ padding-left:64px; }
 .bottomBarInner{
   max-width: 960px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0px;
 }
 .bottomMerged{
   background: var(--bg-surface);
