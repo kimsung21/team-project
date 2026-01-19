@@ -1,0 +1,42 @@
+/* 간편 로그인 / 회원가입 공통 */
+.social-auth {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.social-title {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+
+.social-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-social {
+  flex: 1;
+  padding: 12px 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-social.naver {
+  background: #03c75a;
+  color: #fff;
+}
+
+.btn-social.kakao {
+  background: #fee500;
+  color: #000;
+}
+
+.btn-social.google {
+  background: #f5f5f5;
+  color: #000;
+  border: 1px solid #ddd;
+}
